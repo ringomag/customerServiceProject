@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<ul class="collection with-header">
+    <li class="collection-header"><h4>Customer</h4></li>
+    <li class="collection-item"><span class="teal-text text-darken-2">name: </span>{{customer}}</li>
+    <li class="collection-item"><span class="teal-text text-darken-2">phone number: </span>{{customer.phoneNumber}}</li>
+    <li class="collection-item"><span class="teal-text text-darken-2">email: </span>{{customer.email}}</li>
+    <li class="collection-item"><span class="teal-text text-darken-2">subject: </span>{{customer.subject}}</li>
+    <li class="collection-item"><span class="teal-text text-darken-2">problem description: </span>{{customer.problemDescription}}</li>
+    <li class="collection-item"><span class="teal-text text-darken-2">created: </span>{{customer.created}}</li>  
+    <li class="collection-item blue lighten-5"><span class="blue-text text-darken-2">Admin's Comment: </span>
+      {% if not customer.comments.all %}
+        <p>No Comment...</p>
+      {% else %}
+        <ul class="collection">
+          {% for comment in customer.comments.all %}
+            <li class="collection-item blue lighten-5">{{comment}}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+  </li>       
+  </ul>
+{% endblock %}
