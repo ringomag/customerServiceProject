@@ -57,6 +57,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'service.User'
+
 WSGI_APPLICATION = 'customerServiceProject.wsgi.application'
 
 

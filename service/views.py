@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
-from .models import Customer
+from .models import Comment, Customer
 from django.views import View
-from .forms import CustomerForm
+from .forms import CustomerForm, CommentForm
 from django.contrib import messages
 
 class CustomersView(View):
@@ -11,7 +11,6 @@ class CustomersView(View):
     
     def post(self, request, *args, **kwargs):
         form = CustomerForm(request.POST)
-        print("forma: ", request.POST['dateTimeCallback'])
         if form.is_valid():
             
             form.save()
@@ -24,6 +23,21 @@ def adminPage(request):
     customers = Customer.objects.all()
     return render(request, 'adminPage.html', {'customers':customers})
 
-def details(request, pk):
-    customer = Customer.objects.get(id=pk)
-    return render(request, 'details.html', {'customer':customer})
+
+class DetailsCommentsView(View):
+    
+    def get(self, request, pk, *args, **kwargs):
+        customer = Customer.objects.get(id=pk)
+        form = CommentForm
+        return render(request, 'details.html', {'customer':customer, 'form':form})
+
+    
+
+    def post(self, request, pk, *args, **kwargs):
+        customer = Customer.objects.get(id=pk)
+        
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'details.html', {'customer':customer, 'form':form})
+        

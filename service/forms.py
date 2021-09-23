@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Customer
+from .models import Customer, Comment
 from datetime import datetime
 
 class CustomerForm(ModelForm):
@@ -30,3 +30,15 @@ class CustomerForm(ModelForm):
             if 'dateTimeCallback' in self.errors:
                 del self.errors['dateTimeCallback']
             return cleaned_data
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('user', 'comment', 'customer', )
+
+        widgets = {
+            'user': forms.Select(attrs={'class':'browser-default'}),
+            'customer': forms.Select(attrs={'class':'browser-default'}),
+            'comment': forms.TextInput(attrs={'class':'validate'}),
+
+        }
