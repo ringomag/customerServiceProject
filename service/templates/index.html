@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+{% block css %}
+{{ block.super }}
+<link type="text/css" rel="stylesheet" href="{% static 'css/jquery.datetimepicker.min.css' %}">
+{% endblock %}
+
+
 {% block content %}
 
      
@@ -55,20 +62,31 @@
             </div>
           </div>
           <div class="row">
+            <div class="input-field col s12">
+              {{form.dateTimeCallback}}
+              <label for="email">DateTime for callback</label>
+            </div>
+          </div>
+          <div class="row">
             <div class="col s12">
               <div class="row">
                 <div class="input-field col s12">
                 <button type="submit" class="waves-effect waves-light btn white-text" >Submit</button>
-                  
                 </div>
               </div>
-              
+            </div>
+          </div>    
         </form>
       </div>
 
-      <input id="datetimepicker1">
-
       
-      <script>$('#datetimepicker1').datetimepicker();</script>
+
 {% endblock %}
+
+{% block jsscript %}
+{{ block.super }}
+<script src="{% static '/js/jquery.datetimepicker.full.min.js' %}"></script>
+<script src="{% static '/js/datetimeinit.js' %}"></script>
+{% endblock %}
+
 

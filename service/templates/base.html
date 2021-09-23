@@ -2,19 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    {% block css %}
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{% static '/css/materialize.min.css' %}"  media="screen,projection"/>
-    
     <link type="text/css" rel="stylesheet" href="{% static '/css/main.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    {% endblock %}
 
-    <link type="text/css" rel="stylesheet" href="{% static 'css/jquery.datetimepicker.min.css' %"}>
-    <script src="{% static '/js/jquery.js' %}"></script>
-    <script src="{% static '/js/jquery.datetimepicker.full.min.js' %}"></script>
     <title>Zadatak</title>
 </head>
 <body>
@@ -28,7 +27,6 @@
       </ul>
     </div>
   </nav>
-
   <ul class="sidenav" id="mobile-demo">
     <li><a href="{% url 'index' %}">Contact</a></li>
     <li><a href="{% url 'adminPage' %}">AdminPage</a></li>
@@ -42,11 +40,11 @@
 
   <!-- Compiled and minified JavaScript -->
   
-
+  {% block jsscript %}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script> 
   <script src="{% static 'js/materialize.min.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
-  
+  {% endblock %}
   
 </body>
 

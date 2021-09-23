@@ -10,6 +10,7 @@
     <li class="collection-item"><span class="teal-text text-darken-2">subject: </span>{{customer.subject}}</li>
     <li class="collection-item"><span class="teal-text text-darken-2">problem description: </span>{{customer.problemDescription}}</li>
     <li class="collection-item"><span class="teal-text text-darken-2">created: </span>{{customer.created}}</li>  
+    <li class="collection-item"><span class="teal-text text-darken-2">call back: </span>{{customer.dateTimeCallback}}</li> 
     <li class="collection-item blue lighten-5"><span class="blue-text text-darken-2">Admin's Comment: </span>
       {% if not customer.comments.all %}
         <p>No Comment...</p>
