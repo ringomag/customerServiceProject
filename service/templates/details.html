@@ -36,11 +36,11 @@
     </div>
     <div class="modal-footer">
       <div class="row">
-        <form method="POST" class="col s12">
+        <form id="myform" method="POST" class="col s12">
           {% csrf_token %}
           <div class="row">
             <div class="input-field col s6">
-              
+              {{form.customer}}
               {{form.user}}
               <option value="" disabled selected>Choose User</option>
               
@@ -54,7 +54,7 @@
             </row>
             <div class="row">
               <div class="input-field col s12">
-              <button type="submit" class="waves-effect waves-light btn white-text" >Submit</button>
+              <button type="submit" id="mysubmit" class="waves-effect waves-light btn white-text" >Submit</button>
               </div>
             </div>
             </form>

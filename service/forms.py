@@ -34,11 +34,10 @@ class CustomerForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('user', 'comment', 'customer', )
+        fields = ('user', 'comment', )
 
         widgets = {
             'user': forms.Select(attrs={'class':'browser-default'}),
-            'customer': forms.Select(attrs={'class':'browser-default'}),
             'comment': forms.TextInput(attrs={'class':'validate'}),
 
         }

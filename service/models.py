@@ -70,6 +70,6 @@ class Comment(models.Model):
     modified = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return self.comment
+        return self.comment +  ", " + self.user.user_name 
 
     

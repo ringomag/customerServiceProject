@@ -32,12 +32,13 @@ class DetailsCommentsView(View):
         return render(request, 'details.html', {'customer':customer, 'form':form})
 
     
-
     def post(self, request, pk, *args, **kwargs):
-        customer = Customer.objects.get(id=pk)
         
         form = CommentForm(request.POST)
         if form.is_valid():
-            form.save()
+            customer = Customer.objects.get(id=pk)
+            obj = form.save(commit=False)
+            obj.customer=customer
+            obj.save()
             return render(request, 'details.html', {'customer':customer, 'form':form})
         
