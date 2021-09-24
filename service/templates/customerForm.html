@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+{{ block.super }}
+<link type="text/css" rel="stylesheet" href="{% static 'css/jquery.datetimepicker.min.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<h4>Fill the Form</h4>
+     
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="card-panel teal lighten-4">
+    <li> <span style="color:white; font-weight: bold;">{{ message }}</span> <i class="small material-icons" style="color:rgb(86, 182, 172)">check</i></li>
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="row">
+    <form method="POST" class="col s12">
+      {% csrf_token %}
+      <div class="row">
+        <div class="input-field col s6">
+          {{form.firstName}}
+          <label for="firstName">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          {{form.lastName}}
+          <label for="lastName">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          {{form.phoneNumber}}
+          <label for="phoneNumber">Phone Number (optional)</label>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s12">
+          {{form.email}}
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          {{form.subject}}
+          <label for="subject">Subject</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              {{form.problemDescription}}
+              <label for="problemDescription">Problem Description</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              {{form.dateTimeCallback}}
+              <label for="email">DateTime for callback (optional)</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                <button type="submit" class="waves-effect waves-light btn white-text" >Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>    
+        </form>
+      </div>
+
+      
+
+{% endblock %}
+
+{% block jsscript %}
+{{ block.super }}
+<script src="{% static '/js/jquery.datetimepicker.full.min.js' %}"></script>
+<script src="{% static '/js/datetimeinit.js' %}"></script>
+{% endblock %}
+
+
