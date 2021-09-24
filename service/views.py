@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render
 from .models import Comment, Customer
+from django.contrib.auth.models import User
 from django.views import View
-from .forms import CustomerForm, CommentForm
+from .forms import CustomerForm, CommentForm, ModifiedForm
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import UserPassesTestMixin
@@ -55,12 +55,14 @@ class DetailsCommentsView(SuperUserCheck, View):
         
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = ModifiedForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('index')
+        else:
+            print("errors ",form.errors)
     else:
-        form = UserCreationForm()
+        form = ModifiedForm()
     return render(request, 'registration/signup.html', {
         'form': form
     })

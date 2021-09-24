@@ -3,11 +3,25 @@
 
 
 {% block content %}
-<h2>Sign Up</h2>
+<h4>Sign Up</h4>
 
-<form method="POST">
+<form method="POST" class="col s12">
     {% csrf_token %}
-    {{form.as_p}}
+    <div class="row">
+        <div class="input-field col s12">
+          {{form.username}}
+          <label for="firstName">Username</label>
+        </div>
+        <div class="input-field col s12">
+          {{form.password1}}
+          <label for="lastName">Password</label>
+        </div>
+        <div class="input-field col s12">
+            {{form.password2}}
+            <label for="lastName">Password confirmation</label>
+          </div>
+      </div>
+    <p>{{form.errors}}</p>
     <button type="submit" class="waves-effect waves-light btn white-text" >Submit</button></form>
 
 {% endblock %}

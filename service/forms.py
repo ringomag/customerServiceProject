@@ -2,6 +2,9 @@ from django import forms
 from django.forms import ModelForm
 from .models import Customer, Comment
 from datetime import datetime
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
 
 class CustomerForm(ModelForm):
     class Meta:
@@ -40,4 +43,15 @@ class CommentForm(ModelForm):
             'user': forms.Select(attrs={'class':'browser-default'}),
             'comment': forms.TextInput(attrs={'class':'validate'}),
 
+        }
+
+class ModifiedForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2',)
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class':'validate'}),
+            'password1': forms.PasswordInput(attrs={'class':"validate"}),
+            'password2': forms.PasswordInput(attrs={'class':"validate"})
         }
