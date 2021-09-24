@@ -1,7 +1,18 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Customer, Comment
+from .models import Customer, Comment, User
 from datetime import datetime
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ('email', 'password')
+
+        widgets = {
+            'email':forms.EmailInput(attrs={'class':'validate'}),
+            'password':forms.PasswordInput(attrs={'class':'validate-textarea'}),
+        }
+    
 
 class CustomerForm(ModelForm):
     class Meta:

@@ -1,8 +1,13 @@
+from django.contrib.auth.backends import BaseBackend
 from django.shortcuts import redirect, render
-from .models import Comment, Customer
+from .models import Comment, Customer, User
 from django.views import View
-from .forms import CustomerForm, CommentForm
+from .forms import CustomerForm, CommentForm, UserForm
 from django.contrib import messages
+from django.http import HttpResponse
+from django.contrib.auth.backends import BaseBackend
+
+
 
 class CustomersView(View):
     def get(self, request, *args, **kwargs):
@@ -41,4 +46,5 @@ class DetailsCommentsView(View):
             obj.customer=customer
             obj.save()
             return render(request, 'details.html', {'customer':customer, 'form':form})
-        
+
+
