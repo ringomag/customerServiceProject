@@ -24,7 +24,6 @@ class CustomersView(View):
     def post(self, request, *args, **kwargs):
         form = CustomerForm(request.POST)
         if form.is_valid():
-            
             form.save()
             messages.success(request, "Successfuly Submited!")
             return redirect('customerForm')
@@ -40,21 +39,22 @@ def adminPage(request):
 
 class DetailsCommentsView(SuperUserCheck, View):
 
-    def get(self, request, pk, *args, **kwargs):
-        customer = Customer.objects.get(id=pk)
-        form = CommentForm
+    def get(self, request, *args, **kwargs):
+        customer = Customer.objects.get(id=kwargs['pk'])
+        form = CommentForm        
         return render(request, 'details.html', {'customer':customer, 'form':form})
     
     def post(self, request, pk, *args, **kwargs):
         form = CommentForm(request.POST)
-        if form.is_valid(): 
-            customer = Customer.objects.get(id=pk)
+        customer = Customer.objects.get(id=pk)
+        if form.is_valid():
             obj = form.save(commit=False)
             obj.customer=customer
             if request.user.is_superuser:
                 obj.user=request.user
             obj.save()
-            return render(request, 'details.html', {'customer':customer, 'form':form})
+            return redirect('/details/' + str(pk))   
+        return render(request, 'details.html', {'customer':customer, 'form':form})
         
 def signup(request):
     if request.method == 'POST':
@@ -67,9 +67,7 @@ def signup(request):
             print("errors ",form.errors)
     else:
         form = ModifiedForm()
-    return render(request, 'registration/signup.html', {
-        'form': form
-    })
+    return render(request, 'registration/signup.html', {'form': form})
 
 def deleteCustomer(request, pk):
     customer = Customer.objects.get(id=pk)
@@ -80,9 +78,10 @@ def deleteCustomer(request, pk):
 
 def deleteComment(request, pk):
     comment = Comment.objects.get(id=pk)
+    customer = comment.customer.id
     if request.method == "POST":
         comment.delete()
         messages.info(request, "Comment deleted!")
-        return redirect('adminPage')
+        return redirect('/details/' + str(customer))
     return render(request, 'delete.html', {'comment':comment})
 

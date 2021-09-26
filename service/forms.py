@@ -21,12 +21,17 @@ class CustomerForm(ModelForm):
             'dateTimeCallback':forms.DateTimeInput(attrs={'id':"datetimepicker"}),
         }
 
+#datepicker is useing diferent datetime format
+#first, checking if there is a key datetimecallback in data, then if it is diferent than empty string
     def clean(self):
-            cleaned_data = super().clean()
-            datum = datetime.strptime(self.data['dateTimeCallback'], "%Y/%m/%d %H:%M")
-            
-            cleaned_data['dateTimeCallback'] = datetime.strftime(datum, "%Y-%m-%d %H:%M")
+            cleaned_data = super().clean()            
+            if 'dateTimeCallback' in self.data and self.data['dateTimeCallback'] != '':
+                datum = datetime.strptime(self.data['dateTimeCallback'], "%Y/%m/%d %H:%M")
+                cleaned_data['dateTimeCallback'] = datetime.strftime(datum, "%Y-%m-%d %H:%M")
+            else:
+                cleaned_data['dateTimeCallback'] = None
             return cleaned_data
+            
 
     def full_clean(self):
             cleaned_data = super().full_clean()
