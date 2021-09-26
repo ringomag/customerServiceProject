@@ -17,4 +17,6 @@ If the logic is the same for API and 'service' app, it should be stored on (thir
 I created two tests - one for testing if the object is created (Customer), and the second for testing post request for customer/suport.
 You can run tests by typing in terminal ("./manage.py test").
 
+In project folder, you can find image file of used model ('customerproject model.png')
+
 
