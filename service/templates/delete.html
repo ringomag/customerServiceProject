@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<h4 class="center-align">Are You shure that you want to delete {% if customer %} Customer: {{customer}} {% else %} Comment: {{comment}} {% endif %}</h4>
+<br>
+<form method=POST class="center-align">
+{% csrf_token %}
+<a href="{% url 'adminPage' %}" value="No/Cancel" class="waves-effect waves-light btn white-text tile lighten-3">No/Cancel</a>
+<button type="submit" class="waves-effect waves-light btn white-text red lighten-3">Yes</button>
+</form>
+{% endblock %}

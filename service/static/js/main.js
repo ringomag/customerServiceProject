@@ -3,6 +3,8 @@ $(document).ready(function(){
     });
 
 
-
+//text_area
+$('#textarea1').val('');
+M.textareaAutoResize($('#textarea1'));
 
 

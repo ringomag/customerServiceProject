@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br><br>
+<center><h4>Welcome to the home page of Customer Service</h4></center>
+<center><h4><i>{{user.username}}</i></h4></center>
 <br>
-<center><h4>Welcome to the home page of Customer Service <i>{{user.username}}</i></h4></center>
+<br>
+<h5>There are <i><b>{{user_count}}</b></i> registered users on this website</h5> 
 {% endblock %}

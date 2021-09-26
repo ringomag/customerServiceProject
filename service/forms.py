@@ -17,10 +17,10 @@ class CustomerForm(ModelForm):
             'phoneNumber':forms.TextInput(attrs={'class':'validate'}),
             'email':forms.EmailInput(attrs={'class':'validate'}),
             'subject':forms.TextInput(attrs={'class':'validate'}),
-            'problemDescription':forms.TextInput(attrs={'class':'materialize-textarea'}),
+            'problemDescription':forms.TextInput(attrs={'id':'textarea1', 'class':'materialize-textarea'}),
             'dateTimeCallback':forms.DateTimeInput(attrs={'id':"datetimepicker"}),
-
         }
+
     def clean(self):
             cleaned_data = super().clean()
             datum = datetime.strptime(self.data['dateTimeCallback'], "%Y/%m/%d %H:%M")
@@ -37,12 +37,10 @@ class CustomerForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('user', 'comment', )
+        fields = ('comment', )
 
         widgets = {
-            'user': forms.Select(attrs={'class':'browser-default'}),
             'comment': forms.TextInput(attrs={'class':'validate'}),
-
         }
 
 class ModifiedForm(UserCreationForm):

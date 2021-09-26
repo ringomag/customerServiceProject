@@ -1,10 +1,7 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.contrib.auth.models import User
 
-
-    
 
 class Customer(models.Model):
     firstName = models.CharField(max_length=150, blank=False)
@@ -17,6 +14,9 @@ class Customer(models.Model):
     modified = models.DateTimeField(auto_now=True)
     dateTimeCallback = models.DateTimeField(blank=True, null=True)
 
+    class Meta:
+        ordering = ('-created',)
+
     def __str__(self):
         return self.firstName + " " + self.lastName
 
@@ -27,6 +27,9 @@ class Comment(models.Model):
     comment = models.CharField(max_length=250, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-created',)
     
     def __str__(self):
         return self.comment 

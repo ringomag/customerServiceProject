@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="card-panel teal lighten-4">
+    <li> <span style="color:white; font-weight: bold;">{{ message }}</span> <i class="small material-icons" style="color:rgb(86, 182, 172)">check</i></li>
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <h4>Login</h4>
 <form method="POST">
     {% csrf_token %}

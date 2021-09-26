@@ -13,7 +13,8 @@ class SuperUserCheck(UserPassesTestMixin, View):
         return self.request.user.is_superuser
 
 def index(request):
-    return render(request, 'index.html', {})
+    users_count = User.objects.count()
+    return render(request, 'index.html', {"user_count":users_count})
 
 class CustomersView(View):
     def get(self, request, *args, **kwargs):
@@ -46,10 +47,12 @@ class DetailsCommentsView(SuperUserCheck, View):
     
     def post(self, request, pk, *args, **kwargs):
         form = CommentForm(request.POST)
-        if form.is_valid():
+        if form.is_valid(): 
             customer = Customer.objects.get(id=pk)
             obj = form.save(commit=False)
             obj.customer=customer
+            if request.user.is_superuser:
+                obj.user=request.user
             obj.save()
             return render(request, 'details.html', {'customer':customer, 'form':form})
         
@@ -58,7 +61,8 @@ def signup(request):
         form = ModifiedForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            messages.success(request, "Succesfuly registered!")
+            return redirect('login')
         else:
             print("errors ",form.errors)
     else:
@@ -66,4 +70,19 @@ def signup(request):
     return render(request, 'registration/signup.html', {
         'form': form
     })
+
+def deleteCustomer(request, pk):
+    customer = Customer.objects.get(id=pk)
+    if request.method == "POST":
+        customer.delete()
+        return redirect('adminPage')
+    return render(request, 'delete.html', {'customer':customer})
+
+def deleteComment(request, pk):
+    comment = Comment.objects.get(id=pk)
+    if request.method == "POST":
+        comment.delete()
+        messages.info(request, "Comment deleted!")
+        return redirect('adminPage')
+    return render(request, 'delete.html', {'comment':comment})
 
