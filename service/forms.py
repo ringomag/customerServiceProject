@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class CustomerForm(ModelForm):
+    
     class Meta:
         model = Customer
         fields = ('firstName', 'lastName', 'phoneNumber', 'email', 'subject', 'problemDescription', 'dateTimeCallback')
@@ -22,7 +23,7 @@ class CustomerForm(ModelForm):
         }
 
 #datepicker is useing diferent datetime format
-#first, checking if there is a key datetimecallback in data, then if it is diferent than empty string
+#first, checking if there is a key datetimecallback in data, then checking if it is diferent than empty string
     def clean(self):
             cleaned_data = super().clean()            
             if 'dateTimeCallback' in self.data and self.data['dateTimeCallback'] != '':

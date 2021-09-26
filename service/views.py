@@ -23,6 +23,7 @@ class CustomersView(View):
     
     def post(self, request, *args, **kwargs):
         form = CustomerForm(request.POST)
+        
         if form.is_valid():
             form.save()
             messages.success(request, "Successfuly Submited!")
